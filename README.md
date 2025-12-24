@@ -107,6 +107,22 @@ uvicorn backend.main:app --host 0.0.0.0 --port 8000
 Se você já roda Postgres/Redis fora do app, mantenha-os externos e a API sobe
 apenas com o Uvicorn.
 
+## Dockerfile (build direto)
+
+Se preferir gerar a imagem direto, use o `Dockerfile` na raiz:
+
+```bash
+docker build -t gerenciador-pro .
+docker run --rm -p 8000:8000 gerenciador-pro
+```
+
+Você também pode usar o Dockerfile específico da API:
+
+```bash
+docker build -f docker/api.Dockerfile -t gerenciador-pro-api .
+docker run --rm -p 8000:8000 gerenciador-pro-api
+```
+
 ## Estrutura
 
 ```
