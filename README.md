@@ -78,6 +78,35 @@ Menos mensagens, mais contexto, mais resultado, menos risco.
 docker compose up -d
 ```
 
+## Rodar local sem banco/Redis
+
+Para desenvolvimento local sem banco/Redis, basta subir a API com FastAPI + Uvicorn:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install fastapi uvicorn
+uvicorn backend.main:app --reload
+```
+
+A API ficará disponível em `http://127.0.0.1:8000` e o health check em
+`http://127.0.0.1:8000/health`.
+
+## Rodar em VPS (ex.: EasyPanel com serviço App)
+
+1. Crie um serviço do tipo **App** apontando para este repositório.
+2. Configure o start command:
+
+```bash
+uvicorn backend.main:app --host 0.0.0.0 --port 8000
+```
+
+3. Exponha a porta **8000** no painel.
+4. (Opcional) Defina variáveis de ambiente copiando `.env.example`.
+
+Se você já roda Postgres/Redis fora do app, mantenha-os externos e a API sobe
+apenas com o Uvicorn.
+
 ## Estrutura
 
 ```
